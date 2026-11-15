@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beauty Price</title>
+<style>
+:root{--bg:#faf6f1;--card:#fffdfb;--ink:#2f2f33;--mute:#8a8580;--pink:#e8b4b8;--pink2:#f7e6e6;--beige:#efe4d6;--line:#eadfd3;--ac:#2f2f33;--acink:#fff;--sh:0 6px 20px rgba(60,40,30,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1d20;--card:#29282c;--ink:#f3ece6;--mute:#a39c95;--pink:#d99aa0;--pink2:#3a2f31;--beige:#34312e;--line:#3a373a;--ac:#e8b4b8;--acink:#2a2a2d;--sh:0 6px 20px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#1e1d20;--card:#29282c;--ink:#f3ece6;--mute:#a39c95;--pink:#d99aa0;--pink2:#3a2f31;--beige:#34312e;--line:#3a373a;--ac:#e8b4b8;--acink:#2a2a2d;--sh:0 6px 20px rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Georgia,"Times New Roman",serif}
+button,input{font:inherit;color:inherit}
+.w{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+h1{margin:0;font-size:30px;letter-spacing:.5px;font-weight:600}
+h1 span{color:var(--pink)}
+.sub{margin:2px 0 0;color:var(--mute);font:14px system-ui,sans-serif}
+h2{font-size:19px;margin:22px 0 10px;font-weight:600}
+.sans,.tabs,.chip,.btn,input,.card small{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.ib{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);box-shadow:var(--sh);font-size:19px;cursor:pointer;flex:none}
+.tabs{display:flex;background:var(--beige);border-radius:999px;padding:4px;margin-bottom:6px}
+.tabs button{flex:1;min-height:44px;border:0;border-radius:999px;background:none;font-weight:600;cursor:pointer;color:var(--mute)}
+.tabs button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px}
+.chip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.chip.on{background:var(--pink);border-color:var(--pink);color:#2f2f33;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);padding:14px}
+.svc{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:58px;text-align:left;margin-bottom:10px;cursor:pointer;padding:12px 16px}
+.svc.on{border-color:var(--pink);background:var(--pink2)}
+.svc b{font-weight:500}.svc .p{font:600 15px system-ui,sans-serif;white-space:nowrap}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border:0}
+.x{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;color:var(--mute);flex:none}
+.muted{color:var(--mute);font:14px system-ui,sans-serif}
+input{width:100%;min-height:44px;border:1px solid var(--line);border-radius:14px;padding:0 12px;background:var(--bg)}
+input:focus{outline:2px solid var(--pink)}
+.err{color:#c0504d;font:13px system-ui,sans-serif;min-height:18px;margin-top:4px}
+.btn{min-height:48px;padding:0 20px;border-radius:999px;border:0;background:var(--ac);color:var(--acink);font-weight:600;cursor:pointer}
+.btn.g{background:var(--beige);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btns .btn{flex:1;min-width:130px}
+.tot{display:flex;justify-content:space-between;padding:4px 0;font-family:system-ui,sans-serif}
+.tot.f{font-size:21px;font-weight:700;border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+.rc{background:linear-gradient(160deg,var(--card),var(--pink2));text-align:center}
+.rc h3{margin:0 0 8px;font-size:22px}
+.rc .row{text-align:left}
+.cat{margin-bottom:14px}
+.ed{display:grid;grid-template-columns:1fr 90px 36px;gap:8px;margin-bottom:8px;align-items:center}
+.ed.n{grid-template-columns:1fr 90px 44px}
+.hd{display:grid;grid-template-columns:1fr 36px;gap:8px;margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ac);color:var(--acink);padding:12px 20px;border-radius:999px;font:600 14px system-ui,sans-serif;opacity:0;transition:.3s;pointer-events:none;z-index:9;max-width:90%;text-align:center}
+.toast.s{opacity:1;transform:translate(-50%,0)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}
+.ov .card{max-width:340px;width:100%}
+</style>
+</head>
+<body>
+<div class="w">
+<header>
+<div><h1 id="brand"></h1><p class="sub">Красивый и удобный расчёт стоимости услуг</p></div>
+<button class="ib" id="th" aria-label="Сменить тему"></button>
+</header>
+<div class="tabs"><button data-tab="calc">Расчёт</button><button data-tab="edit">Мои услуги</button></div>
+<main id="app"></main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='beautyprice.v1';
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cents=p=>Math.round(p*100);
+const money=c=>(c/100).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const defCats=()=>[
+['Маникюр',[['Маникюр без покрытия',20],['Маникюр с покрытием',30],['Укрепление ногтей',10],['Дизайн ногтей',8],['Снятие покрытия',7]]],
+['Педикюр',[['Классический педикюр',35],['Педикюр с покрытием',45]]],
+['Брови и ресницы',[['Коррекция бровей',15],['Окрашивание бровей',15],['Ламинирование ресниц',40]]]
+].map(([n,it])=>({id:uid(),name:n,items:it.map(([a,b])=>({id:uid(),name:a,price:b}))}));
+let S={salon:'Beauty Price',theme:null,cats:defCats(),sel:[],discount:0,cat:null,tab:'calc'};
+try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&Array.isArray(d.cats))S=Object.assign(S,d)}catch(e){}
+if(!S.cats.find(c=>c.id===S.cat))S.cat=S.cats[0]?S.cats[0].id:null;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+let tt;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('s'),2600)}
+function applyTheme(){if(S.theme)document.documentElement.setAttribute('data-theme',S.theme);else document.documentElement.removeAttribute('data-theme');
+const dark=S.theme?S.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;$('#th').textContent=dark?'☀️':'🌙';
+$('#brand').innerHTML='<span>✦</span> '+esc(S.salon)}
+function calc(){const items=[];S.cats.forEach(c=>c.items.forEach(i=>{if(S.sel.includes(i.id))items.push(i)}));
+const sub=items.reduce((a,i)=>a+cents(i.price),0),disc=Math.round(sub*S.discount/100);return{items,sub,disc,total:sub-disc}}
+function text(){const r=calc();if(!r.items.length)return'';
+return[S.salon,'',...r.items.map(i=>i.name+' — '+money(cents(i.price))),'','Сумма: '+money(r.sub),...(S.discount>0?['Скидка '+S.discount+'%: −'+money(r.disc)]:[]),'Итого к оплате: '+money(r.total)].join('\n')}
+function ask(msg,ok){const o=document.createElement('div');o.className='ov';o.innerHTML='<div class="card"><p>'+esc(msg)+'</p><div class="btns"><button class="btn g" data-c="0">Отмена</button><button class="btn" data-c="1">Да</button></div></div>';
+o.onclick=e=>{const c=e.target.dataset.c;if(c===undefined&&e.target!==o)return;o.remove();if(c==='1')ok()};document.body.appendChild(o)}
+function totals(){const r=calc();
+$('#tot').innerHTML=r.items.length?'<div class="tot"><span>Сумма</span><span>'+money(r.sub)+'</span></div><div class="tot"><span>Скидка '+S.discount+'%</span><span>−'+money(r.disc)+'</span></div><div class="tot f"><span>К оплате</span><span>'+money(r.total)+'</span></div>':'<p class="muted">Выберите услуги в каталоге — здесь появится расчёт.</p>';
+$('#rc').innerHTML=r.items.length?'<h3>'+esc(S.salon)+'</h3>'+r.items.map(i=>'<div class="row sans"><span>'+esc(i.name)+'</span><b>'+money(cents(i.price))+'</b></div>').join('')+'<div class="tot"><span>До скидки</span><span>'+money(r.sub)+'</span></div><div class="tot"><span>Скидка</span><span>−'+money(r.disc)+'</span></div><div class="tot f"><span>Итого</span><span>'+money(r.total)+'</span></div>':'<p class="muted">Пока нет выбранных услуг.</p>';
+document.querySelectorAll('[data-need]').forEach(b=>b.disabled=!r.items.length)}
+function render(){
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
+applyTheme();
+$('#app').innerHTML=S.tab==='calc'?viewCalc():viewEdit();
+if(S.tab==='calc')totals()}
+function viewCalc(){
+const cat=S.cats.find(c=>c.id===S.cat);const r=calc();
+if(!S.cats.length)return'<div class="card"><p class="muted">Каталог пуст. Добавьте категории в разделе «Мои услуги».</p></div>';
+return'<h2>Каталог услуг</h2><div class="chips">'+S.cats.map(c=>'<button class="chip'+(c.id===S.cat?' on':'')+'" data-act="cat" data-id="'+c.id+'">'+esc(c.name)+'</button>').join('')+'</div>'
++(cat&&cat.items.length?cat.items.map(i=>'<button class="card svc'+(S.sel.includes(i.id)?' on':'')+'" data-act="tg" data-id="'+i.id+'"><b>'+(S.sel.includes(i.id)?'✓ ':'')+esc(i.name)+'</b><span class="p">'+money(cents(i.price))+'</span></button>').join(''):'<p class="muted">В этой категории пока нет услуг.</p>')
++'<h2>Выбранные услуги</h2><div class="card">'+(r.items.length?r.items.map(i=>'<div class="row sans"><span>'+esc(i.name)+'</span><span>'+money(cents(i.price))+' <button class="x" data-act="rm" data-id="'+i.id+'" aria-label="Удалить">✕</button></span></div>').join(''):'<p class="muted">Ничего не выбрано.</p>')+'</div>'
++'<h2>Скидка</h2><div class="card"><label class="muted" for="ds">Скидка, % (от 0 до 100)</label><input id="ds" inputmode="decimal" value="'+S.discount+'"><div class="err" id="de"></div></div>'
++'<h2>Итоговая стоимость</h2><div class="card" id="tot"></div>'
++'<h2>Расчёт для клиента</h2><div class="card rc" id="rc"></div>'
++'<div class="btns"><button class="btn" data-act="copy" data-need>Скопировать расчёт</button><button class="btn" data-act="share" data-need>Поделиться</button><button class="btn g" data-act="clear" data-need>Очистить расчёт</button></div>'}
+function viewEdit(){
+return'<h2>Название салона</h2><div class="card"><input id="sn" value="'+esc(S.salon)+'" maxlength="40" data-f="salon"></div>'
++'<h2>Прайс-лист</h2>'+S.cats.map(c=>'<div class="card cat"><div class="hd"><input value="'+esc(c.name)+'" data-f="cname" data-c="'+c.id+'" maxlength="40"><button class="x" data-act="dc" data-id="'+c.id+'" aria-label="Удалить категорию">✕</button></div>'
++c.items.map(i=>'<div class="ed"><input value="'+esc(i.name)+'" data-f="iname" data-id="'+i.id+'" maxlength="60"><input value="'+i.price+'" inputmode="decimal" data-f="iprice" data-id="'+i.id+'"><button class="x" data-act="di" data-id="'+i.id+'" aria-label="Удалить услугу">✕</button></div>').join('')
++'<div class="ed n"><input placeholder="Новая услуга" id="nn'+c.id+'" maxlength="60"><input placeholder="€" inputmode="decimal" id="np'+c.id+'"><button class="x" style="width:44px;height:44px;background:var(--ac);color:var(--acink)" data-act="ai" data-id="'+c.id+'" aria-label="Добавить услугу">+</button></div></div>').join('')
++'<div class="card"><label class="muted" for="nc">Новая категория</label><div class="ed n" style="grid-template-columns:1fr 44px;margin:8px 0 0"><input id="nc" placeholder="Например, Массаж" maxlength="40"><button class="x" style="width:44px;height:44px;background:var(--ac);color:var(--acink)" data-act="ac" aria-label="Добавить категорию">+</button></div></div>'
++'<div class="btns"><button class="btn g" data-act="reset">Восстановить стандартный каталог</button></div>'}
+function price(v){const n=Number(String(v).trim().replace(',','.'));return v!==''&&isFinite(n)&&n>=0&&n<=100000?Math.round(n*100)/100:null}
+function findItem(id){for(const c of S.cats){const i=c.items.find(x=>x.id===id);if(i)return i}}
+function fix(){S.sel=S.sel.filter(id=>findItem(id));if(!S.cats.find(c=>c.id===S.cat))S.cat=S.cats[0]?S.cats[0].id:null}
+async function copy(t){try{await navigator.clipboard.writeText(t);return true}catch(e){try{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();return ok}catch(e2){return false}}}
+document.addEventListener('click',async e=>{
+const tab=e.target.closest('[data-tab]');if(tab){S.tab=tab.dataset.tab;save();render();return}
+if(e.target.closest('#th')){const dark=S.theme?S.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;S.theme=dark?'light':'dark';save();applyTheme();return}
+const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,id=b.dataset.id;
+if(a==='cat'){S.cat=id}
+else if(a==='tg'){S.sel=S.sel.includes(id)?S.sel.filter(x=>x!==id):[...S.sel,id]}
+else if(a==='rm'){S.sel=S.sel.filter(x=>x!==id)}
+else if(a==='clear'){S.sel=[];S.discount=0;toast('Расчёт очищен')}
+else if(a==='copy'){const t=text();if(t)toast(await copy(t)?'Расчёт скопирован ✓':'Не удалось скопировать — выделите текст вручную');return}
+else if(a==='share'){const t=text();if(!t)return;
+ if(navigator.share){try{await navigator.share({title:S.salon,text:t});return}catch(err){if(err&&err.name==='AbortError')return}}
+ toast(await copy(t)?'Поделиться недоступно — расчёт скопирован ✓':'Не удалось поделиться или скопировать');return}
+else if(a==='dc'){const c=S.cats.find(x=>x.id===id);ask('Удалить категорию «'+c.name+'» вместе со всеми услугами?',()=>{S.cats=S.cats.filter(x=>x.id!==id);fix();save();render();toast('Категория удалена')});return}
+else if(a==='di'){S.cats.forEach(c=>c.items=c.items.filter(i=>i.id!==id));fix()}
+else if(a==='ai'){const n=$('#nn'+id).value.trim(),p=price($('#np'+id).value);
+ if(!n){toast('Введите название услуги');return}if(p===null){toast('Цена: число от 0 до 100 000');return}
+ S.cats.find(c=>c.id===id).items.push({id:uid(),name:n,price:p});toast('Услуга добавлена')}
+else if(a==='ac'){const n=$('#nc').value.trim();if(!n){toast('Введите название категории');return}
+ const c={id:uid(),name:n,items:[]};S.cats.push(c);if(!S.cat)S.cat=c.id;toast('Категория добавлена')}
+else if(a==='reset'){ask('Восстановить стандартный каталог? Ваши услуги и текущий расчёт будут удалены.',()=>{S.cats=defCats();S.sel=[];S.discount=0;S.cat=S.cats[0].id;save();render();toast('Каталог восстановлен')});return}
+save();render()});
+document.addEventListener('change',e=>{
+const f=e.target.dataset.f;if(!f)return;const v=e.target.value.trim();
+if(f==='salon'){if(!v){toast('Название не может быть пустым');e.target.value=S.salon;return}S.salon=v;applyTheme()}
+else if(f==='cname'){const c=S.cats.find(x=>x.id===e.target.dataset.c);if(!v){toast('Название не может быть пустым');e.target.value=c.name;return}c.name=v}
+else if(f==='iname'){const i=findItem(e.target.dataset.id);if(!v){toast('Название не может быть пустым');e.target.value=i.name;return}i.name=v}
+else if(f==='iprice'){const i=findItem(e.target.dataset.id),p=price(v);if(p===null){toast('Цена: число от 0 до 100 000');e.target.value=i.price;return}i.price=p;e.target.value=p}
+save()});
+document.addEventListener('input',e=>{
+if(e.target.id!=='ds')return;const raw=e.target.value.trim().replace(',','.'),n=raw===''?0:Number(raw);
+if(!isFinite(n)||n<0||n>100){$('#de').textContent='Скидка должна быть числом от 0 до 100';return}
+$('#de').textContent='';S.discount=Math.round(n*100)/100;save();totals()});
+render();
+</script>
+</body>
+</html>
